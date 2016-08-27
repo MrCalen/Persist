@@ -8,8 +8,7 @@ use Calen\Persist\Persister\Persister;
 class PersistServiceProvider extends ServiceProvider
 {
     public function boot()
-    {
-    }
+    {}
 
     public function register()
     {
@@ -17,5 +16,8 @@ class PersistServiceProvider extends ServiceProvider
             return new Persister($app);
         });
 
+        $this->publishes([
+            __DIR__.'/Config/config.php' => config_path('persist.php'),
+        ]);
     }
 }
