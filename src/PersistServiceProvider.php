@@ -9,11 +9,13 @@ class PersistServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app->singleton('persist', function ($app) {
-            return new Persister($app);
-        });
     }
 
     public function register()
-    {}
+    {
+        $this->app->singleton('persist', function ($app) {
+            return new Persister($app);
+        });
+
+    }
 }

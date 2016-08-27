@@ -15,4 +15,14 @@ class Persister
     {
         $this->app = $app;
     }
+
+    public function persist($key, $value)
+    {
+        dd($key);
+    }
+
+    public function forget($key)
+    {
+        dd($key);
+    }
 }
