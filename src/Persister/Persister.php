@@ -2,6 +2,7 @@
 
 namespace Calen\Persist\Persister;
 use Calen\Persist\Config\ConfigHandler;
+use Calen\Persist\Drivers\NullDriver;
 use Calen\Persist\Exceptions\NoDriverFoundException;
 
 /**
@@ -24,7 +25,7 @@ class Persister
         $this->app = $app;
         $this->config = new ConfigHandler();
         $this->driver = $this->config->parse();
-        if (!$this->driver) {
+        if ($this->driver instanceof NullDriver) {
             throw new NoDriverFoundException();
         }
     }

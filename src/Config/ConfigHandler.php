@@ -2,6 +2,7 @@
 
 namespace Calen\Persist\Config;
 
+use Calen\Persist\Drivers\NullDriver;
 use Calen\Persist\Drivers\PersistantInterface;
 
 class ConfigHandler
@@ -11,13 +12,10 @@ class ConfigHandler
         $driver = config('persist.driver');
         switch ($driver) {
             case 'file':
-                dd("bite");
                 break;
             case 'database':
                 break;
-            default:
-                return null;
         }
-        return null;
+        return new NullDriver();
     }
 }
