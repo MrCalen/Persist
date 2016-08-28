@@ -34,21 +34,21 @@ class Persister
      * Persists a key in the driver
      * @param $key : the key to save
      * @param $value : the value to be save
-     * @returns void
+     * @param bool $save
      */
-    public function persist($key, $value)
+    public function persist($key, $value, $save = false)
     {
-        $this->driver->persist($key, $value);
+        $this->driver->persist($key, $value, $save);
     }
 
     /**
      * Deletes an entry
      * @param $key : the key to delete
-     * @returns void
+     * @param bool $save
      */
-    public function forget($key)
+    public function forget($key, $save = false)
     {
-        $this->driver->forget($key);
+        $this->driver->forget($key, $save);
     }
 
     /**

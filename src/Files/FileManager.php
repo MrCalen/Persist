@@ -2,24 +2,28 @@
 
 namespace Calen\Persist\Files;
 
+use Calen\Persist\Entry\EntryManager;
 use Calen\Persist\Exceptions\FilePermissionException;
+use Exception;
 
 class FileManager
 {
     protected $filename;
     protected $data;
+    protected $entryMgr;
 
     public function __construct($filename)
     {
         $this->filename = $filename;
+        $this->entryMgr = new EntryManager();
     }
 
-    public function createIfNotExists()
+    private function createIfNotExists()
     {
         if (!file_exists($this->filename)) {
             try {
-                file_put_contents($this->filename, "{}");
-            } catch (\Exception $e) {
+                file_put_contents($this->filename, json_encode([]));
+            } catch (Exception $e) {
                 throw new FilePermissionException();
             }
         }
@@ -28,6 +32,26 @@ class FileManager
     public function parse()
     {
         $this->createIfNotExists();
-        $this->data = file_get_contents($this->filename);
+        $this->data = json_decode(file_get_contents($this->filename), true);
+    }
+
+    public function save()
+    {
+        file_put_contents($this->filename, json_encode($this->data));
+    }
+
+    public function changeEntry($key, $value)
+    {
+        $this->entryMgr->changeEntry($this->data, $key, $value);
+    }
+
+    public function removeEntry($key)
+    {
+        $this->entryMgr->deleteEntry($this->data, $key);
+    }
+
+    public function getEntry($key)
+    {
+        return $this->entryMgr->getEntry($this->data, $key);
     }
 }
