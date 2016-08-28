@@ -54,9 +54,18 @@ class Persister
     /**
      * Get a registered key
      * @param $key : the key to be retrieved
+     * @return mixed
      */
     public function get($key)
     {
         return $this->driver->get($key);
+    }
+
+    /**
+     * Explicit save
+     */
+    public function save()
+    {
+        $this->driver->save();
     }
 }

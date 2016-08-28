@@ -2,9 +2,12 @@
 
 namespace Calen\Persist\Files;
 
+use Calen\Persist\Exceptions\FilePermissionException;
+
 class FileManager
 {
     protected $filename;
+    protected $data;
 
     public function __construct($filename)
     {
@@ -20,5 +23,11 @@ class FileManager
                 throw new FilePermissionException();
             }
         }
+    }
+
+    public function parse()
+    {
+        $this->createIfNotExists();
+        $this->data = file_get_contents($this->filename);
     }
 }
