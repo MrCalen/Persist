@@ -9,9 +9,8 @@ class CreatePersistTable extends Migration
 
     /**
      * CreatePersistTable constructor.
-     * @param $tableName
      */
-    public function __construct($tableName)
+    public function __construct()
     {
         $this->tableName = config('persist.table');
     }
