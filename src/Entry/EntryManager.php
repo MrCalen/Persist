@@ -6,6 +6,9 @@ class EntryManager
 {
     private function createEntry(&$data, $key)
     {
+        if (!is_array($data)) {
+            $data = [];
+        }
         $data[$key] = [];
     }
 
