@@ -1,6 +1,6 @@
 <?php
 
-namespace Calen\Persist\Files;
+namespace Calen\Persist\Manager;
 
 use Calen\Persist\Entry\EntryManager;
 use Calen\Persist\Exceptions\FilePermissionException;

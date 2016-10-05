@@ -5,6 +5,17 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePersistTable extends Migration
 {
+    protected $tableName;
+
+    /**
+     * CreatePersistTable constructor.
+     * @param $tableName
+     */
+    public function __construct($tableName)
+    {
+        $this->tableName = config('persist.table');
+    }
+
     /**
      * Run the migrations.
      *
@@ -12,7 +23,7 @@ class CreatePersistTable extends Migration
      */
     public function up()
     {
-        Schema::create('persists', function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->text('data');
         });
@@ -25,6 +36,6 @@ class CreatePersistTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persists');
+        Schema::dropIfExists($this->tableName);
     }
 }

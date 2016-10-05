@@ -3,7 +3,7 @@
 namespace Calen\Persist\Drivers;
 
 use Calen\Persist\Exceptions\NoDriverFoundException;
-use Calen\Persist\Files\FileManager;
+use Calen\Persist\Manager\FileManager;
 
 class FileDriver implements PersistantInterface
 {
