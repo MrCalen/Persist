@@ -6,13 +6,13 @@ use Calen\Persist\Entry\EntryManager;
 use Calen\Persist\Exceptions\FilePermissionException;
 use Exception;
 
-class FileManager
+class FileManager implements Manager
 {
     protected $filename;
     protected $data;
     protected $entryMgr;
 
-    public function __construct($filename)
+    public function __construct(string $filename)
     {
         $this->filename = $filename;
         $this->entryMgr = new EntryManager();

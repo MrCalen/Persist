@@ -2,17 +2,12 @@
 
 namespace Calen\Persist\Drivers;
 
-class NullDriver implements PersistantInterface
+use Calen\Persist\Manager\Manager;
+
+class NullDriver extends Driver
 {
-    public function persist($k, $v, $save = false)
-    {}
-
-    public function forget($k, $save = false)
-    {}
-
-    public function get($k)
-    {}
-
-    public function save()
-    {}
+    public function getManager() : Manager
+    {
+        return null;
+    }
 }

@@ -2,62 +2,30 @@
 
 namespace Calen\Persist\Drivers;
 
-class DatabaseDriver implements PersistantInterface
-{
+use Calen\Persist\Exceptions\NoDriverFoundException;
+use Calen\Persist\Manager\DatabaseManager;
+use Calen\Persist\Manager\Manager;
 
+class DatabaseDriver extends Driver
+{
     protected $dbMgr;
+    protected $tableName;
 
     /**
      * DatabaseDriver constructor.
      */
     public function __construct()
     {
-        $this->filename = config('persist.file');
+        $this->tableName = config('persist.table');
+        if (!$this->tableName) {
+            throw new NoDriverFoundException();
+        }
+
+        $this->dbMgr = new DatabaseManager($this->tableName);
     }
 
-
-    /**
-     * Sets a new value related to the key given
-     * @param $k : the key
-     * @param $v : the value
-     * @param bool $save : explicit save or not
-     * @return void
-     */
-    public function persist($k, $v, $save = false)
+    public function getManager() : Manager
     {
-        // TODO: Implement persist() method.
-        dd("persist");
-    }
-
-    /**
-     * Removes a key
-     * @param $k : the key
-     * @param bool $save : explicit save or not
-     * @return void
-     */
-    public function forget($k, $save = false)
-    {
-        // TODO: Implement forget() method.
-        dd("persist");
-    }
-
-    /**
-     * Get the value of the given key
-     * @param $k : the key
-     * @return mixed
-     */
-    public function get($k)
-    {
-        // TODO: Implement get() method.
-        dd("persist");
-    }
-
-    /**
-     * Explicit save
-     */
-    public function save()
-    {
-        // TODO: Implement save() method.
-        dd("persist");
+        return $this->dbMgr;
     }
 }

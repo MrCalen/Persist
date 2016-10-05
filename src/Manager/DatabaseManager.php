@@ -4,13 +4,13 @@ namespace Calen\Persist\Manager;
 
 use Calen\Persist\Entry\EntryManager;
 
-class DatabaseManager
+class DatabaseManager implements Manager
 {
     protected $table;
     protected $data;
     protected $entryMgr;
 
-    public function __construct($table)
+    public function __construct(string $table)
     {
         $this->table = $table;
         $this->entryMgr = new EntryManager();
