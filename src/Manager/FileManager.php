@@ -6,7 +6,7 @@ use Calen\Persist\Entry\EntryManager;
 use Calen\Persist\Exceptions\FilePermissionException;
 use Exception;
 
-class FileManager implements Manager
+class FileManager extends Manager
 {
     protected $filename;
     protected $data;

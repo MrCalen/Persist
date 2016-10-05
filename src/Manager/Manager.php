@@ -2,15 +2,16 @@
 
 namespace Calen\Persist\Manager;
 
-interface Manager
+abstract class Manager
 {
-    public function parse();
+    public abstract function parse();
 
-    public function save();
+    public abstract function save();
 
-    public function changeEntry($key, $value);
+    public abstract function changeEntry($key, $value);
 
-    public function removeEntry($key);
+    public abstract function removeEntry($key);
 
-    public function getEntry($key);
+    public abstract function getEntry($key);
+
 }
