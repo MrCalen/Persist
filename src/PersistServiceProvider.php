@@ -19,5 +19,10 @@ class PersistServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/Config/config.php' => config_path('persist.php'),
         ]);
+
+        $migrationName = 'migrations/2016_10_05_104219_create_persist_table.php';
+        $this->publishes([
+            __DIR__."/{$migrationName}" => base_path("databases/{$migrationName}"),
+        ]);
     }
 }
