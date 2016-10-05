@@ -1,0 +1,12 @@
+{
+    "name": "calen/persist",
+    "description": "Application Preferences",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pierre-Louis Dagues",
+            "email": "redis@acu.epita.fr"
+        }
+    ],
+    "require": {}
+}
