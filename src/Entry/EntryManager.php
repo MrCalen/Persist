@@ -14,22 +14,27 @@ class EntryManager
         return explode('.', $key);
     }
 
+    public function findTree($data, $parts, $value)
+    {
+        if (!count($parts)) {
+            return $value;
+        }
+        $newKey = array_shift($parts);
+        if (!isset($data[$newKey])) {
+            $this->createEntry($data, $newKey);
+        }
+
+        $data[$newKey] = $this->findTree($data[$newKey], $parts, $value);
+
+        return $data;
+    }
+
     public function changeEntry(&$dt, $key, $value)
     {
         $data = $dt;
         $keyParts = $this->parseKey($key);
-        foreach ($keyParts as $index => $part) {
-            if (!isset($data[$part])) {
-                $this->createEntry($data, $part);
-            }
-
-            $data = $data[$part];
-
-            if ($index === count($keyParts) - 1) {
-                $data[$part] = $value;
-            }
-        }
-        dd($data);
+        $data = $this->findTree($data, $keyParts, $value);
+        $dt = $data;
     }
 
     public function deleteEntry(&$data, $key)
@@ -52,10 +57,10 @@ class EntryManager
     {
         $keyParts = $this->parseKey($key);
         foreach ($keyParts as $index => $part) {
-            if (!isset($data[$key])) {
+            if (!isset($data[$part])) {
                 return null;
             }
-            $data = $data[$key];
+            $data = $data[$part];
 
             if ($index === count($keyParts) - 1) {
                 return $data;
